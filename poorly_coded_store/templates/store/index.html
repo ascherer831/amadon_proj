@@ -11,32 +11,34 @@
 </head>
 <body>
     <h1 class="text-center display-2">Amadon Store!</h1>
-    <table table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in all_products %}
-            <tr>
-                <form action="/checkout" method="post">
-                    {% csrf_token %}
-                    <td>{{product.description}}</td>
-                    <td><input type="hidden" name="price" value="{{product.price}}">{{product.price}}</td>
-                    <td><select name="quantity">
-                        <option value="1">1</option>              
-                        <option value="2">2</option>              
-                        <option value="3">3</option>              
-                    </select></td>
-                    <td><input type="submit" value="Buy!"></td>
-                </form>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="d-flex justify-content-center">
+        <table class="table table-dark table-striped w-50">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in all_products %}
+                <tr>
+                    <form action="/process" method="post">
+                        {% csrf_token %}
+                        <td>{{product.description}}</td>
+                        <td><input type="hidden" name="id" value="{{product.id}}">{{product.price}}</td>
+                        <td><select name="quantity">
+                            <option value="1">1</option>              
+                            <option value="2">2</option>              
+                            <option value="3">3</option>              
+                        </select></td>
+                        <td><input type="submit" value="Buy!"></td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
